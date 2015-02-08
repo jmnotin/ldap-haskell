@@ -1,3 +1,5 @@
+cabal-version: >=1.8
+
 Name: LDAP
 Version: 0.6.10
 License: BSD3
@@ -14,7 +16,6 @@ license-file: COPYRIGHT
 extra-source-files: COPYING
 
 Build-Type: Simple
-Cabal-Version: >=1.2.3
 
 Flag buildtests
   description: Build the executable to run unit tests
@@ -39,6 +40,7 @@ Library
 
   Extra-Libraries: ldap, lber
 
+
   GHC-Options: -O2
   -- CC-Options: -Iglue
   if os(openbsd)
@@ -48,12 +50,27 @@ Library
   Extensions: ForeignFunctionInterface, TypeSynonymInstances,
               EmptyDataDecls, ScopedTypeVariables, CPP
 
+Test-Suite test-ldap
+  type: exitcode-stdio-1.0
+  main-is: runtests.hs
+  Extra-Libraries: ldap, lber
+  build-depends: base >= 4 && < 5,
+                 LDAP,
+                 HUnit
+  if os(openbsd)
+    CC-Options: -DLDAP_X_PROXY_AUTHZ_FAILURE=LDAP_PROXY_AUTHZ_FAILURE
+  else
+    CC-Options: -DLDAP_DEPRECATED=1
+  GHC-Options: -O2
+  Extensions: ForeignFunctionInterface, TypeSynonymInstances,
+              EmptyDataDecls, ScopedTypeVariables, CPP
+  hs-source-dirs: testsrc, .
+
 Executable runtests
   if flag(buildtests)
     Buildable: True
   else
     Buildable: False
-  Extra-Libraries: ldap, lber
   Main-Is: runtests.hs
   if os(openbsd)
     CC-Options: -DLDAP_X_PROXY_AUTHZ_FAILURE=LDAP_PROXY_AUTHZ_FAILURE

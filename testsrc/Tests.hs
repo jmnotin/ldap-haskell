@@ -13,11 +13,7 @@ testSearchNoAttrs = TestCase $ do
     -- A sample public LDAP server
     ldap <- ldapInitialize "ldap://scripts.mit.edu/"
     r <- ldapSearch ldap (Just "ou=People,dc=scripts,dc=mit,dc=edu") LdapScopeOnelevel Nothing LDAPNoAttrs True
-    evaluate (length (show r)) -- poor mans rnf
-    return ()
+    assertBool "Search does not return results" (length r > 0)
 
 tests = TestList [TestLabel "testSearchNoAttrs" testSearchNoAttrs
                  ]
-
-
-

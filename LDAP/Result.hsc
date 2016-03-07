@@ -54,7 +54,7 @@ fromldmptr caller action =
           then fail (caller ++ ": got null LDAPMessage pointer")
           else newForeignPtr ldap_msgfree_call ptr
 
-foreign import ccall unsafe "ldap.h ldap_result"
+foreign import ccall safe "ldap.h ldap_result"
   ldap_result :: LDAPPtr -> LDAPInt -> LDAPInt -> Ptr () -> Ptr (Ptr CLDAPMessage) -> IO LDAPInt
 
 foreign import ccall unsafe "ldap.h &ldap_msgfree"

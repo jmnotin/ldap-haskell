@@ -122,11 +122,11 @@ freeCLDAPMod ptr =
 withCLDAPModArr0 :: [LDAPMod] -> (Ptr (Ptr CLDAPMod) -> IO a) -> IO a
 withCLDAPModArr0 = withAnyArr0 newCLDAPMod freeCLDAPMod
 
-foreign import ccall unsafe "ldap.h ldap_modify_s"
+foreign import ccall safe "ldap.h ldap_modify_s"
   ldap_modify_s :: LDAPPtr -> CString -> Ptr (Ptr CLDAPMod) -> IO LDAPInt
 
-foreign import ccall unsafe "ldap.h ldap_delete_s"
+foreign import ccall safe "ldap.h ldap_delete_s"
   ldap_delete_s :: LDAPPtr -> CString -> IO LDAPInt
 
-foreign import ccall unsafe "ldap.h ldap_add_s"
+foreign import ccall safe "ldap.h ldap_add_s"
   ldap_add_s :: LDAPPtr -> CString -> Ptr (Ptr CLDAPMod) -> IO LDAPInt

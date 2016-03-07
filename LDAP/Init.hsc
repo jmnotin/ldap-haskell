@@ -110,13 +110,13 @@ foreign import ccall unsafe "ldap.h ldap_init"
   cldap_init :: CString -> CInt -> IO LDAPPtr
 
 
-foreign import ccall unsafe "ldap.h ldap_open"
+foreign import ccall safe "ldap.h ldap_open"
   cldap_open :: CString -> CInt -> IO LDAPPtr
 
 foreign import ccall unsafe "ldap.h ldap_initialize"
   ldap_initialize :: Ptr LDAPPtr -> CString -> IO LDAPInt
 
-foreign import ccall unsafe "ldap.h ldap_simple_bind_s"
+foreign import ccall safe "ldap.h ldap_simple_bind_s"
   ldap_simple_bind_s :: LDAPPtr -> CString -> CString -> IO LDAPInt
 
 foreign import ccall unsafe "ldap.h ldap_set_option"

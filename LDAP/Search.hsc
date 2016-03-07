@@ -153,7 +153,7 @@ foreign import ccall unsafe "ldap.h ldap_get_values_len"
 foreign import ccall unsafe "ldap.h ldap_value_free_len"
   ldap_value_free_len :: Ptr (Ptr Berval) -> IO ()
 
-foreign import ccall unsafe "ldap.h ldap_search"
+foreign import ccall safe "ldap.h ldap_search"
   ldap_search :: LDAPPtr -> CString -> LDAPInt -> CString -> Ptr CString ->
                  LDAPInt -> IO LDAPInt
 

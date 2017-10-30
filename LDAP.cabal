@@ -48,7 +48,7 @@ Library
   if os(openbsd)
     CC-Options: -DLDAP_X_PROXY_AUTHZ_FAILURE=LDAP_PROXY_AUTHZ_FAILURE
   else
-    CC-Options: -DLDAP_DEPRECATED=1
+    CC-Options: -DLDAP_DEPRECATED=1 -fPIC
   Extensions: ForeignFunctionInterface, TypeSynonymInstances,
               EmptyDataDecls, ScopedTypeVariables, CPP
 
